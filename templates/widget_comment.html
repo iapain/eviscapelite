@@ -1,0 +1,12 @@
+{% for e in comments %}
+		<li id="comment_{{ e.id }}" class="hentry mine status latest-status">
+			<span class="status-body">
+				<strong><a title="{{ e.node.nod_name }}" class="tweet-url screen-name" href="http://www.eviscape.com/{{ e.node.nod_name }}">{{ e.node.nod_name }}</a></strong>
+				<span class="entry-content">{{ e.ecm_comment }}</span>
+				<span class="meta entry-meta">
+					<span class="published">{{ e.ecm_insert_date|timesince }} ago</span>
+				</span>
+			</span>
+		</li>
+{% endfor %}
+<input type="text" id="comment-box-{{ evi_id }}" class="commentbox" name="comment" style="width: 300px; height: 24px"/><input type="button" value="Comment" id="save-comment" onclick="post_comment('{{ evi_id }}');" />

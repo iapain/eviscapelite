@@ -1,0 +1,16 @@
+{% for e in evis %}
+		<li id="evis_{{ e.id }}" class="hentry mine status latest-status">
+			<span class="thumb vcard author"><a class="tweet-url profile-pic url" href="http://www.eviscape.com/{{ e.node.nod_name }}"><img width="48" height="48" src="{% if e.node.nod_logo_image %}{{ e.node.nod_logo_image }}{% else %}http://www.eviscape.com/static/images/no_image_50px.png{% endif %}" class="photo fn" alt="{{ e.node.nod_name }}"/></a></span>
+			<span class="status-body">
+				<strong><a title="{{ e.node.nod_name }}" class="tweet-url screen-name" href="http://www.eviscape.com/{{ e.node.nod_name }}">{{ e.node.nod_name }}</a></strong>
+				<span class="entry-content">{{ e.evi_subject }}</span>
+				<span class="meta entry-meta">
+				<span class="published">{{ e.evi_insert_date|timesince }} ago</span>
+					<span class="published"><a href="javascript:;" onclick='$("#status").val("@{{ e.node.nod_name }} "); $("#status").focus();'>Reply</a></span>
+					<span class="published"> <a class="round" href="javascript:;" onclick="load_comment('{{ e.id }}', this);">{{ e.evi_comment_count }} comment(s)</a></span>
+					<span class="published"> <a href="{{e.evi_permalink }}">View on Eviscape</a></span>
+				</span>
+				<div id="comment-{{ e.id }}" style="display:none"></div>
+			</span>
+		</li>
+{% endfor %}

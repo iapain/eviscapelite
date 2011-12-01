@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}{{ user.mem_name }} - {{ block.super }}{% endblock %}
+{% block body %}
+<table cellspacing="0" class="columns">
+          <tbody>
+            <tr>
+              <td id="content" class="round-left column">
+                                <div class="wrapper">
+                  
+                  
+
+
+
+
+
+<div id="status_update_box"><form action="/post" class="status-update-form" id="status_update_form" method="post"><div style="margin:0;padding:0"></div>
+  <input id="tab_action" name="tab" type="hidden" value="index" /><input id="in_reply_to_status_id" name="in_reply_to_status_id" type="hidden" value="" />  <input id="in_reply_to" name="in_reply_to" type="hidden" value="" />  <input id="source" name="source" type="hidden" value="" />  <input id="tab_action" name="tab" type="hidden" value="index" />
+
+  <fieldset class="common-form standard-form">
+    <div class="bar">
+      <h3><label for="status" class="doing">What are you doing?</label></h3>
+      <span id="chars_left_notice" class="numeric">
+        <strong id="status-field-char-counter" class="char-counter"></strong>
+      </span>
+	  <span id="loader" style="display:none"><img alt="Loader" src="http://a0.twimg.com/a/1253830975/images/loader.gif" /></span>
+    </div>
+    <div class="info">
+      <textarea cols="40" rows="2" id="status" name="status" accesskey="u" autocomplete="off" tabindex="1"></textarea>
+      <div class="status-btn">
+        <input type="button" name="update" value="update" id="update-submit" class="status-btn round-btn" tabindex="2" />
+      </div>
+      <div id="currently" style="display:none">
+        <strong>Latest:</strong>
+        <span id="latest_status"></span>
+          </span>
+  </span>
+
+</span>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
+
+</div>
+
+
+<div class="section">
+
+    <div style="display:none" id="search-show"><h3>Showing search results</h3></div>
+	<ol id="timeline" class="statuses">
+	{% for e in evis %}
+		<li id="evis_{{ e.id }}" class="hentry mine status latest-status">
+			<span class="thumb vcard author"><a class="tweet-url profile-pic url" href="http://www.eviscape.com/{{ e.node.nod_name }}"><img width="48" height="48" src="{% if e.node.nod_logo_image %}{{ e.node.nod_logo_image }}{% else %}http://www.eviscape.com/static/images/no_image_50px.png{% endif %}" class="photo fn" alt="{{ e.node.nod_name }}"/></a></span>
+			<span class="status-body">
+				<strong><a title="{{ e.node.nod_name }}" class="tweet-url screen-name" href="http://www.eviscape.com/{{ e.node.nod_name }}">{{ e.node.nod_name }}</a></strong>
+				<span class="entry-content">{{ e.evi_subject }}</span>
+				<span class="meta entry-meta">
+				<span class="published">{{ e.evi_insert_date|timesince }} ago</span>
+					<span class="published"><a href="javascript:;" onclick='$("#status").val("@{{ e.node.nod_name }} "); $("#status").focus();'>Reply</a></span>
+					<span class="published"> <a class="round" href="javascript:;" onclick="load_comment('{{ e.id }}', this);">{{ e.evi_comment_count }} comment(s)</a></span>
+					<span class="published"> <a href="{{e.evi_permalink }}">View on Eviscape</a></span>
+				</span>
+				<div id="comment-{{ e.id }}" style="display:none"></div>
+			</span>
+		</li>
+	{% endfor %}
+	</ol>
+  
+
+  <div id="paginationbar">
+    <div id="pagination"><span class="round more" id="more" rel="next">more</span></div>
+  </div>
+
+  
+
+</div>
+
+
+
+                </div>
+                              </td>
+
+              
+                <td id="side_base" class="column round-right">
+                                  
+                  <div id="side">
+                      <div id="profile" class="section">
+  <div class="user_icon">
+		  <a class="url" title="{{ user.nod_name_primary }}" rel="contact" href="#">
+		  <img class="side_thumb photo fn" height="48" width="48" src="{% if user.nod_logo_image %}{{ user.nod_logo_image }}{% else %}http://www.eviscape.com/static/images/no_image_50px.png{% endif %}" alt="{{ user.nod_name_primary }}"/>
+		  <span id="me_name">{% if user.nod_name_primary %}{{ user.nod_name_primary }}{% else %}{{ user.mem_name }}{% endif %}</span> {{ listeners }}
+		  </a>
+  </div>
+  
+					<ul id="primary_nav" class="sidebar-menu">
+					<li id="home_tab" class="">
+					<a class="in-page-link" accesskey="h" href="javascript:;" id="dashboard-home">
+					<span>Home</span>
+					</a>
+					</li>
+					<li id="home_tab" class="">
+					<a class="in-page-link" accesskey="r" href="javascript:;" id="dashboard-replies">
+					<span>@{{ user.mem_name }} replies</span>
+					</a>
+					</li>
+					<li id="home_tab" class="">
+					<a class="in-page-link" accesskey="s" href="javascript:;" id="dashboard-sent">
+					<span>Sent</span>
+					</a>
+					</li>
+					</ul>
+</div>
+
+  <div id="custom_search">
+    <form action="/search" class="search" id="sidebar_search" method="get"><input id="sidebar_search_q" type="text" name="q" accesskey="/" class="round-left" title="Search" value=""
+      /><span id="sidebar_search_submit" class="submit round-right" title="Search">&nbsp;</span>
+          </form>
+  </div>
+  <div id="jab">Jab Evis at<br /> <a href="xmpp://{{ user.mem_name }}-{{ user.mem_oauth_secret}}@evisbot.appspotchat.com">{{ user.mem_name }}-{{ user.mem_oauth_secret}}@evisbot.appspotchat.com</a></div>
+
+                  </div>
+                                </td>
+              
+            </tr>
+          </tbody>
+        </table>
+{% endblock %}

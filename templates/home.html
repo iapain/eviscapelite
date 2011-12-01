@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home - {{ block.super }}{% endblock %}
+{% block body %}
+<table cellspacing="0" class="columns">
+          <tbody>
+            <tr>
+              <td id="content" class="round-left column">
+                                <div class="wrapper">
+										<h2>EviscapeLite - Brings light to Eviscape</h2>
+										<div>EviscapeLite is twitter like service for Eviscape.com. We use eviscape account to Sign In.</div>
+										<p><a href="/session/login" accesskey="s">Sign In</a> here. New to Eviscape? <a href="http://www.eviscape.com/register" accesskey="r">Sign Up</a> and comeback :).</p>
+										<img src="/static/images/{{ image }}" alt="yotsuba" />
+										<div>Picture belongs to <a href="http://www.flickr.com/photos/kayveeinc/">KayVee.INC</a></div>
+
+                  </div>
+                                </td>
+              
+            </tr>
+          </tbody>
+        </table>
+{% endblock %}
+
+{% block menu %}
+		  <li><a href="/session/login" accesskey="l">Sign In</a>(Eviscape Account)</li>
+{% endblock %}
